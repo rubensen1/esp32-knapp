@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffe26d;
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Overskrift */
+h1 {
+  color: #003357;
+  font-size: 2.5rem;  /* endre størrelse */
+}
+
+/* Navigation */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  align: center;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+ul li {
+  float: center;
+}
+
+ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  background-color: #111111;
+}
+
+/* Tekstboks */
+input[type="text"] {
+  padding: 10px;
+  width: 300px;
+  font-size: 1rem;
+  border: 2px solid #0077cc;
+  border-radius: 10px;
+}
+
+/* Knapp */
+button {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #005fa3;
+}
+
+/* Checkbokser + labels */
+.option {
+  margin: 10px;
+}
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #0077cc; /* fargen på haken */
+}
+label {
+  font-size: 1.2rem;
+  margin-left: 5px;
+}

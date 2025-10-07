@@ -2,15 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vote Control</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Meningsmåling</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+<ul>
+  <li><a href="spm.asp">Spørsmål</a></li>
+  <li><a href="svar.asp">Svar og resultater</a></li>
+</ul>
 <body>
-  <h1>Ask a Question</h1>
+  <h1>Legg til spørsmål:</h1>
+
   <input id="question" placeholder="Type question...">
   <button onclick="sendQuestion()">Send</button>
+
+  <h2>Velg spørsmål:</h2>
+  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1"> I have a bike</label><br>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
