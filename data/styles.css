@@ -1,6 +1,6 @@
 body {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Arial Narrow', Arial, sans-serif, sans-serif;
-  background-color: #4E3651;
+  background-color: #222222;
   color: #e79be0;
   text-align: center;
   padding: 20px;
@@ -11,18 +11,19 @@ h1 {
   color: #E1D4E2;
   font-size: 2.5rem;  /* endre størrelse */
 }
-
 /* Navigation */
 ul {
+  display: flex; /* Arrange items in a row */
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  overflow: hidden;
+  padding: 10px;
   background-color: #634460;
 }
 
 ul li {
-  float: center;
+  /* Remove float and use flex layout */
+  /* Optional: add margin for spacing */
+  margin: 0 10px; /* Horizontal spacing between items */
 }
 
 ul li a {
