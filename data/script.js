@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', loadQuestions);
 
     function sendQuestion() {
@@ -50,6 +49,34 @@ document.addEventListener('DOMContentLoaded', loadQuestions);
 
     //slett alle spørsmål
     function clearQuestions() {
-  localStorage.removeItem('questions');
-  document.getElementById('questionList').innerHTML = '';
+      localStorage.removeItem('questions');
+      document.getElementById('questionList').innerHTML = '';
+    }
+
+
+    //Sende spørsmål til ESP -> LCD
+    function sendToScreen() {
+      const checked = [];
+      document.querySelectorAll('#questionList input[type="checkbox"]:checked')
+        .forEach(cb => checked.push(cb.id));  // collect all checked question texts
+
+      if (checked.length === 0) {
+        alert("Please select at least one question.");
+        return;
+      }
+
+      // Send selected questions to ESP32
+      fetch('/api/screen', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ questions: checked })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to send data");
+        alert("Sent to screen!");
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error sending data to ESP32.");
+      });
 }
