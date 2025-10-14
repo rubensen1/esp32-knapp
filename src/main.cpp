@@ -1,20 +1,19 @@
-#include <Arduino.h>
+#include "DFRobot_RGBLCD1602.h"
 
-// put function declarations here:
-int myFunction(int, int);
+DFRobot_RGBLCD1602 lcd(0x6B, 16, 2); // RGB-adresse, 16x2 display
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  lcd.init();            // Initialiser skjermen
+  lcd.setCursor(0, 0);
+  lcd.print("Hello world!");
+  lcd.setCursor(0, 1);
+  lcd.print("ESP32 DFRobot");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Slå RGB-baklys mellom rød og blå
+  lcd.setRGB(255, 0, 0); // Rød
+  delay(1000);
+  lcd.setRGB(0, 0, 255); // Blå
+  delay(1000);
 }
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
-}
-
-//test kommentar
