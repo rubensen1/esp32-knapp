@@ -63,9 +63,19 @@ document.addEventListener('DOMContentLoaded', loadQuestions);
       if (checked.length === 0) {
         alert("Please select at least one question.");
         return;
+      }}
+
+      // Samler markerte spørsmål og sender som JSON
+    function sendToScreen() {
+      const checked = [];
+      document.querySelectorAll('#questionList input[type="checkbox"]:checked')
+        .forEach(cb => checked.push(cb.id));
+
+      if (checked.length === 0) {
+        alert("Please select at least one question.");
+        return;
       }
 
-      // Send selected questions to ESP32
       fetch('/api/screen', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -79,4 +89,5 @@ document.addEventListener('DOMContentLoaded', loadQuestions);
         console.error(err);
         alert("Error sending data to ESP32.");
       });
-}
+    }
+
