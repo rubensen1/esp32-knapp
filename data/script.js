@@ -54,18 +54,8 @@ document.addEventListener('DOMContentLoaded', loadQuestions);
     }
 
 
-    //Sende spørsmål til ESP -> LCD
-    function sendToScreen() {
-      const checked = [];
-      document.querySelectorAll('#questionList input[type="checkbox"]:checked')
-        .forEach(cb => checked.push(cb.id));  // collect all checked question texts
 
-      if (checked.length === 0) {
-        alert("Please select at least one question.");
-        return;
-      }}
-
-      // Samler markerte spørsmål og sender som JSON
+    // Samler markerte spørsmål og sender som JSON
     function sendToScreen() {
       const checked = [];
       document.querySelectorAll('#questionList input[type="checkbox"]:checked')
