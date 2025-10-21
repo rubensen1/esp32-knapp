@@ -19,16 +19,6 @@ void handleNotFound() {
   server.send(404, "text/plain", "Not found");
 }
 
-void handleStatus() {
-  server.send(200, "application/json", String("{\"led\":") + (ledState ? "true" : "false") + "}");
-}
-
-void handleToggle() {
-  ledState = !ledState;
-  digitalWrite(LED_PIN, ledState ? LOW : HIGH);
-  handleStatus();
-}
-
 void handleScreen() {
   if (server.hasArg("plain")) {
     String message = server.arg("plain");
@@ -91,11 +81,10 @@ void setup() {
     Serial.println("mDNS responder started: http://esp32.local/");
   }
 
-  server.on("/api/status", HTTP_GET, handleStatus);
-  server.on("/api/toggle", HTTP_POST, handleToggle);
+  server.on("/api/screen", HTTP_POST, handleScreen);
   server.serveStatic("/", SPIFFS, "/index.html");
   server.serveStatic("/styles.css", SPIFFS, "/styles.css");
-  server.serveStatic("/j.js", SPIFFS, "/j.js");
+  server.serveStatic("/script.js", SPIFFS, "/script.js");
   server.onNotFound(handleNotFound);
 
   server.begin();
