@@ -93,7 +93,6 @@ void setup() {
 
   server.on("/api/status", HTTP_GET, handleStatus);
   server.on("/api/toggle", HTTP_POST, handleToggle);
-  server.on("/api/screen", HTTP_POST, handleScreen);
   server.serveStatic("/", SPIFFS, "/index.html");
   server.serveStatic("/styles.css", SPIFFS, "/styles.css");
   server.serveStatic("/j.js", SPIFFS, "/j.js");

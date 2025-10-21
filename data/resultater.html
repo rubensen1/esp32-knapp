@@ -4,15 +4,61 @@
   <meta charset="UTF-8" />
   <title>Meningsmåling</title>
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Include Chart.js library from CDN for chart rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <!-- Navigation menu -->
   <nav>
     <ul>
+      <!-- Logo image -->
       <li><img src="data:image/png;base64,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" alt="Logo" /></li>
       <li><a href="index.html">Spørsmål</a></li>
       <li><a href="resultater.html">Svar og Resultater</a></li>
     </ul>
   </nav>
-    <h2>Resultater:</h2>
+
+  <h2>Resultater</h2>
+
+  <!-- Canvas element where the poll graph will be rendered -->
+  <canvas id="pollChart" width="600" height="300"></canvas>
+
+  <!-- JavaScript code to initialize the chart -->
+  <script>
+    // Wait for DOM to load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get the context of the canvas
+      const ctx = document.getElementById('pollChart').getContext('2d');
+
+      // Initialize Chart.js bar chart
+      const pollChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          // Labels for each poll option
+          labels: ['JA', 'KANSKJE', 'NEI'],
+          datasets: [{
+            label: 'Poll Results',
+            data: [10, 5, 3], // Replace with your actual poll data
+            backgroundColor: [
+              'rgba(2, 213, 57, 0.8)', // Color for YES
+              'rgba(248, 209, 0, 0.8)', // Color for NO
+              'rgba(218, 0, 0, 0.8)'  // Color for MAYBE
+            ],
+            
+            borderWidth: 1
+          }]
+        },
+        options: {
+          // Ensure y-axis starts at zero
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

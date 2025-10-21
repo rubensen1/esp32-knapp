@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', loadQuestions);
     }
 
 
-    // Sende spørsmål til ESP -> LCD
+
+    // Samler markerte spørsmål og sender som JSON
     function sendToScreen() {
       const checked = [];
       document.querySelectorAll('#questionList input[type="checkbox"]:checked')
