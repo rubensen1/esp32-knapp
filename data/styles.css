@@ -1,28 +1,29 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffe26d;
-  color: #333;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, 'Arial Narrow', Arial, sans-serif, sans-serif;
+  background-color: #222222;
+  color: #e79be0;
   text-align: center;
   padding: 20px;
 }
 
 /* Overskrift */
 h1 {
-  color: #003357;
+  color: #E1D4E2;
   font-size: 2.5rem;  /* endre størrelse */
 }
-
 /* Navigation */
 ul {
+  display: flex; /* Arrange items in a row */
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333333;
+  padding: 10px;
+  background-color: #634460;
 }
 
 ul li {
-  float: center;
+  /* Remove float and use flex layout */
+  /* Optional: add margin for spacing */
+  margin: 0 10px; /* Horizontal spacing between items */
 }
 
 ul li a {
@@ -34,7 +35,7 @@ ul li a {
 }
 
 ul li a:hover {
-  background-color: #111111;
+  background-color: #a1719c;
 }
 
 /* Tekstboks */
@@ -42,13 +43,13 @@ input[type="text"] {
   padding: 10px;
   width: 300px;
   font-size: 1rem;
-  border: 2px solid #0077cc;
+  border: 2px solid #E1D4E2;
   border-radius: 10px;
 }
 
 /* Knapp */
 button {
-  background-color: #0077cc;
+  background-color: #434343;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -69,7 +70,7 @@ button:hover {
 input[type="checkbox"] {
   width: 20px;
   height: 20px;
-  accent-color: #0077cc; /* fargen på haken */
+  accent-color: #e79be0; /* fargen på haken */
 }
 label {
   font-size: 1.2rem;
