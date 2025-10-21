@@ -2,13 +2,15 @@
 #include <WebServer.h>
 #include <SPIFFS.h>
 #include <ESPmDNS.h>
+#include <DFRobot_RGBLCD1602.h>
+#include <ArduinoJson.h>
 
 const char* ssid = "phone1";
 const char* password = "phone123";
 
 WebServer server(80);
 
-DFRobot_LCD lcd(16, 2);  // 16x2 LCD
+DFRobot_RGBLCD1602 lcd(0x6B, 16, 2); 
 
 const int LED_PIN = 2;
 bool ledState = false;
@@ -27,15 +29,48 @@ void handleToggle() {
   handleStatus();
 }
 
+void handleScreen() {
+  if (server.hasArg("plain")) {
+    String message = server.arg("plain");
+    StaticJsonDocument<200> doc;
+    DeserializationError error = deserializeJson(doc, message);
+    
+    if (!error) {
+      JsonArray questions = doc["questions"];
+      lcd.clear();
+      
+      // Viser første spørsmål på LCD
+      if (questions.size() > 0) {
+        String question = questions[0];
+        // Hvis spørsmålet er lengre enn 16 tegn, vis bare første 16
+        lcd.setCursor(0, 0);
+        lcd.print(question.substring(0, 16));
+        if (question.length() > 16) {
+          lcd.setCursor(0, 1);
+          lcd.print(question.substring(16, 32));
+        }
+      }
+      
+      server.send(200, "application/json", "{\"success\":true}");
+    } else {
+      server.send(400, "application/json", "{\"error\":\"Invalid JSON\"}");
+    }
+  } else {
+    server.send(400, "application/json", "{\"error\":\"No data received\"}");
+  }
+}
+
 void setup() {
   Serial.begin(115200);
-  lcd.init();
-  lcd.display();
-  lcd.setCursor(0, 0);
-  lcd.print("Ready!");
-
   pinMode(LED_PIN, OUTPUT);
   digitalWrite(LED_PIN, HIGH);
+  lcd.setRGB(0, 0, 255);
+
+  lcd.init();            // Initialiser skjermen
+  lcd.setCursor(0, 0);
+  lcd.print("Hello world!");
+  lcd.setCursor(0, 1);
+  lcd.print("ESP32 DFRobot");
 
   // SPIFFS
   if (!SPIFFS.begin(true)) {
@@ -63,44 +98,10 @@ void setup() {
   server.serveStatic("/styles.css", SPIFFS, "/styles.css");
   server.serveStatic("/j.js", SPIFFS, "/j.js");
   server.onNotFound(handleNotFound);
- 
 
   server.begin();
 }
 
 void loop() {
   server.handleClient();
-}
-
-void handleScreen() {
-  if (server.hasArg("plain")) {
-    String body = server.arg("plain");
-    StaticJsonDocument<256> doc;
-    DeserializationError error = deserializeJson(doc, body);
-
-    if (error) {
-      server.send(400, "text/plain", "Invalid JSON");
-      return;
-    }
-
-    if (!doc.containsKey("questions")) {
-      server.send(400, "text/plain", "Missing questions");
-      return;
-    }
-
-    JsonArray arr = doc["questions"];
-    lcd.clear();
-
-    // Print first 2 lines only (since LCD is 16x2)
-    for (int i = 0; i < arr.size() && i < 2; i++) {
-      lcd.setCursor(0, i);
-      lcd.print(arr[i].as<const char*>());
-    }
-
-    server.send(200, "text/plain", "Displayed on LCD");
-    Serial.println("Displayed on LCD:");
-    serializeJson(doc, Serial);
-  } else {
-    server.send(400, "text/plain", "Missing body");
-  }
 }
