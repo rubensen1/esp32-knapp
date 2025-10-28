@@ -4,7 +4,7 @@
 #include <ESPmDNS.h>
 #include <DFRobot_RGBLCD1602.h>
 #include <ArduinoJson.h>
-#include <FastLED.h>
+// #include <FastLED.h>
 
 #define LED_PIN 4
 #define NUM_LEDS 20
@@ -20,7 +20,7 @@ const int kulereLedPin = 2;
 bool ledState = false;
 
 
-CRGB leds[NUM_LEDS];
+// CRGB leds[NUM_LEDS];
 
 const int green_button_pin = 34;
 const int yellow_button_pin = 36;
@@ -73,7 +73,7 @@ void handleScreen() {
 }
 
 void setup() {
-  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+  // FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
   
   pinMode(green_button_pin, INPUT);
   pinMode(yellow_button_pin, INPUT);
@@ -83,14 +83,15 @@ void setup() {
   pinMode(yellow_led_pin, OUTPUT);
   pinMode(red_led_pin, OUTPUT);
 
-  pinMode(sda_pin, OUTPUT);
-  pinMode(scl_pin, OUTPUT);
+  // pinMode(sda_pin, OUTPUT);
+  // pinMode(scl_pin, OUTPUT);
 
   Serial.begin(115200);
 
-  Serial.begin(115200);
   pinMode(kulereLedPin, OUTPUT);
   digitalWrite(kulereLedPin, HIGH);
+
+  Wire.begin(sda_pin, scl_pin);
   lcd.setRGB(0, 0, 255);
 
   lcd.init();            // Initialiser skjermen
@@ -143,10 +144,10 @@ void loop() {
     digitalWrite(yellow_led_pin, HIGH);
     digitalWrite(red_led_pin, HIGH);
 
-    for (int i = 0; i <= 19; i++) {
-    leds[i] = CRGB (0, 255,0);
-    }
-    FastLED.show();
+    // for (int i = 0; i <= 19; i++) {
+    // leds[i] = CRGB (0, 255,0);
+    // }
+    // FastLED.show();
 
   } else if (yellow_button_state == 1) {
      Serial.println("Yellow button");
@@ -154,10 +155,10 @@ void loop() {
      digitalWrite(yellow_led_pin, LOW);
      digitalWrite(red_led_pin, HIGH);
 
-    for (int i = 0; i <= 19; i++) {
-    leds[i] = CRGB (255, 255,0);
-    }
-    FastLED.show();
+    // for (int i = 0; i <= 19; i++) {
+    // leds[i] = CRGB (255, 255,0);
+    // }
+    // FastLED.show();
 
   } else if (red_button_state == 1) {
     Serial.println("Red button");
@@ -165,10 +166,10 @@ void loop() {
     digitalWrite(yellow_led_pin, HIGH);
     digitalWrite(red_led_pin, LOW);
 
-    for (int i = 0; i <= 19; i++) {
-      leds[i] = CRGB (255, 0,0);
-    }
-    FastLED.show();
+    // for (int i = 0; i <= 19; i++) {
+    //   leds[i] = CRGB (255, 0,0);
+    // }
+    // FastLED.show();
   }
 
   else {
