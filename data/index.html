@@ -15,18 +15,50 @@
     </ul>
   </nav>
 
-  <h1>Legg til spørsmål:</h1>
+  <body>
+  <div class="container">
+    <!-- Left Section -->
+    <div class="left-section">
+      <h1>Legg til spørsmål:</h1>
+      <input id="question" placeholder="Type question..." />
+      <button onclick="sendQuestion()">Send</button>
+      <button onclick="clearQuestions()">Slett alle spørsmål</button>
+      <h2>Velg spørsmål:</h2>
+      <div id="questionList"></div>
+      <button onclick="sendToScreen()" id="uploadToScreen">Send til skjerm</button>
+    </div>
 
-  <input id="question" placeholder="Type question..." />
-  <button onclick="sendQuestion()">Send</button>
-  <button onclick="clearQuestions()">Slett alle spørsmål</button>
+    <!-- Right Section -->
+    <div class="right-section">
+      <h3>Tilpasning</h3>
+      
+      <div class="option-group">
+          <p>Lys:</p>
+          <div class="option-buttons" id="lys-buttons">
+            <button class="option-btn" onclick="setLys('AV')">AV</button>
+            <button class="option-btn" onclick="setLys('PÅ')">PÅ</button>
+          </div>
+        </div>
 
-  <h2>Velg spørsmål:</h2>
-  <div id="questionList"></div>
-  <button onclick="sendToScreen()" id="uploadToScreen">Send til skjerm</button>
+        <div class="option-group">
+          <p>Lyd:</p>
+          <div class="option-buttons" id="lyd-buttons">
+            <button class="option-btn" onclick="setLyd('AV')">AV</button>
+            <button class="option-btn" onclick="setLyd('PÅ')">PÅ</button>
+          </div>
+        </div>
+
+        <div class="option-group">
+          <p>Blindmodus:</p>
+          <div class="option-buttons" id="blind-buttons">
+            <button class="option-btn" onclick="setBlindmodus('AV')">AV</button>
+            <button class="option-btn" onclick="setBlindmodus('PÅ')">PÅ</button>
+          </div>
+        </div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
 

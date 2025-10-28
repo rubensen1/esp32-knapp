@@ -127,4 +127,49 @@ function sendToScreen() {
     console.error(err);
     alert("Error sending data to ESP32.");
   });
+  }
+
+// Functions for toggling options
+function setLys(option) {
+  toggleOption('lys-buttons', option);
+  lysState = option;
+  console.log('Lys:', lysState);
 }
+
+function setLyd(option) {
+  toggleOption('lyd-buttons', option);
+  lydState = option;
+  console.log('Lyd:', lydState);
+}
+
+function setBlindmodus(option) {
+  toggleOption('blind-buttons', option);
+  blindState = option;
+  console.log('Blindmodus:', blindState);
+}
+
+function toggleOption(containerId, selectedOption) {
+  const container = document.getElementById(containerId);
+  const buttons = container.querySelectorAll('.option-btn');
+
+  buttons.forEach(btn => {
+    if (btn.textContent === selectedOption) {
+      btn.classList.add('selected');
+    } else {
+      btn.classList.remove('selected');
+    }
+  });
+}
+
+// Initialize default states after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Set default button states
+  document.querySelector('#lys-buttons .option-btn:nth-child(2)').classList.add('selected');
+  document.querySelector('#lyd-buttons .option-btn:nth-child(2)').classList.add('selected');
+ 
+  // Set default for Blindmodus to 'AV'
+  setBlindmodus('AV');
+
+  console.log('Initial states:', { lysState, lydState, blindState });
+  // Your other initialization code...
+});
