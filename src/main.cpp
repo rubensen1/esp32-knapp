@@ -85,17 +85,5 @@ void loop() {
     digitalWrite(red_led_pin, HIGH);
   }
 
-  for (int i = 0; i <= 19; i++) {
-  leds[i] = CRGB ( 0, 0, 255);
-  FastLED.show();
-  delay(40);
-  }
-  for (int i = 19; i >= 0; i--) {
-  leds[i] = CRGB ( 255, 0, 0);
-  FastLED.show();
-  delay(40); }
-
-
   delay(20);
-
 }
