@@ -25,9 +25,6 @@ const int green_button_pin = 34;
 const int yellow_button_pin = 36;
 const int red_button_pin = 39;
 
-const int sda_pin = 21;
-const int scl_pin = 22;
-
 const int green_led_pin = 17;
 const int yellow_led_pin = 18;
 const int red_led_pin = 19;
@@ -82,15 +79,11 @@ void setup() {
   pinMode(yellow_led_pin, OUTPUT);
   pinMode(red_led_pin, OUTPUT);
 
-  // pinMode(sda_pin, OUTPUT);
-  // pinMode(scl_pin, OUTPUT);
-
   Serial.begin(115200);
 
   pinMode(kulereLedPin, OUTPUT);
   digitalWrite(kulereLedPin, HIGH);
 
-  Wire.begin(sda_pin, scl_pin);
   lcd.setRGB(0, 0, 255);
 
   lcd.init();            // Initialiser skjermen
