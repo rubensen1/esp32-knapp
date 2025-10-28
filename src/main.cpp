@@ -16,9 +16,6 @@ WebServer server(80);
 
 DFRobot_RGBLCD1602 lcd(0x6B, 16, 2); 
 
-const int kulereLedPin = 2;
-bool ledState = false;
-
 // CRGB leds[NUM_LEDS];
 
 const int green_button_pin = 34;
@@ -70,6 +67,8 @@ void handleScreen() {
 
 void setup() {
   // FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
+  Serial.begin(115200);
+  Serial.println("ESP32 start!");
   
   pinMode(green_button_pin, INPUT);
   pinMode(yellow_button_pin, INPUT);
@@ -79,14 +78,13 @@ void setup() {
   pinMode(yellow_led_pin, OUTPUT);
   pinMode(red_led_pin, OUTPUT);
 
-  Serial.begin(115200);
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, HIGH);
 
-  pinMode(kulereLedPin, OUTPUT);
-  digitalWrite(kulereLedPin, HIGH);
-
+  Wire.begin();
+  lcd.init();            // Initialiser skjermen
   lcd.setRGB(0, 0, 255);
 
-  lcd.init();            // Initialiser skjermen
   lcd.setCursor(0, 0);
   lcd.print("Hello world!");
   lcd.setCursor(0, 1);
