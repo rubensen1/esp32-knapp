@@ -19,7 +19,6 @@ DFRobot_RGBLCD1602 lcd(0x6B, 16, 2);
 const int kulereLedPin = 2;
 bool ledState = false;
 
-
 // CRGB leds[NUM_LEDS];
 
 const int green_button_pin = 34;
@@ -135,7 +134,7 @@ void loop() {
   int green_button_state = digitalRead(green_button_pin);
   int yellow_button_state = digitalRead(yellow_button_pin);
   int red_button_state = digitalRead(red_button_pin);
-  Serial.println("ballalalalal");
+  Serial.println((green_button_state, yellow_button_state, red_button_state));
   
 
   if (green_button_state == 1) {
