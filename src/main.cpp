@@ -43,9 +43,10 @@ void loop() {
   int green_button_state = digitalRead(green_button_pin);
   int yellow_button_state = digitalRead(yellow_button_pin);
   int red_button_state = digitalRead(red_button_pin);
+  Serial.println("ballalalalal");
   
 
-  if (green_button_state == 0) {
+  if (green_button_state == 1) {
     Serial.println("Green button");
     digitalWrite(green_led_pin, LOW);
     digitalWrite(yellow_led_pin, HIGH);
@@ -56,7 +57,7 @@ void loop() {
     }
     FastLED.show();
 
-  } else if (yellow_button_state == 0) {
+  } else if (yellow_button_state == 1) {
      Serial.println("Yellow button");
      digitalWrite(green_led_pin, HIGH);
      digitalWrite(yellow_led_pin, LOW);
@@ -67,7 +68,7 @@ void loop() {
     }
     FastLED.show();
 
-  } else if (red_button_state == 0) {
+  } else if (red_button_state == 1) {
     Serial.println("Red button");
     digitalWrite(green_led_pin, HIGH);
     digitalWrite(yellow_led_pin, HIGH);
