@@ -76,3 +76,12 @@ label {
   font-size: 1.2rem;
   margin-left: 5px;
 }
+
+.chart-container {
+  display: flex;
+  justify-content: center; /* center horizontally */
+  padding: 50px; /* space around the chart, adjust as needed */
+  /* optional: set max width for the container */
+  max-width: 80%;
+  margin: auto;
+}

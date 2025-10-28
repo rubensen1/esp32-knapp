@@ -1,6 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Last eksisterende spørsmål ved oppstart
-  loadQuestions();
+    loadQuestions();
+
+    const ctx = document.getElementById('pollChart').getContext('2d');
+    const chartTypeSelect = document.getElementById('chartType');
+    const promptLabel = document.getElementById('promptLabel');
+
+    // Set the prompt label
+    promptLabel.textContent = 'Prompt: JA, NEI, KANSKJE';
+
+    let pollChart;
+
+    function createChart(type) {
+      if (pollChart) {
+        pollChart.destroy();
+      }
+      pollChart = new Chart(ctx, {
+        type: type,
+        data: {
+          labels: ['JA', 'KANSKJE', 'NEI'],
+          datasets: [{
+            label: 'Poll Results',
+            data: [10, 5, 3], // Replace with real data
+            backgroundColor: [
+              'rgba(2, 213, 57, 0.8)',
+              'rgba(248, 209, 0, 0.8)',
+              'rgba(218, 0, 0, 0.8)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top'
+            }
+          }
+        }
+      });
+    }
+
+    // Initialize with default chart type
+    createChart(chartTypeSelect.value);
+
+    // Add event listener for dropdown
+    chartTypeSelect.addEventListener('change', () => {
+    console.log('Selected chart type:', chartTypeSelect.value); // To verify
+    createChart(chartTypeSelect.value);
+  });
 });
 
 function sendQuestion() {
