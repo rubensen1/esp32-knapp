@@ -25,6 +25,10 @@ int green_button_state = 1;
 int yellow_button_state = 1;
 int red_button_state = 1;
 
+// debounce ting
+unsigned long lastPress = 0;
+const unsigned long deBounce = 500;
+
 // WiFi credentials
 const char* ssid = "phone1";
 const char* password = "phone123";
@@ -66,6 +70,11 @@ void handleScreen() {
     server.send(400, "application/json", "{\"error\":\"No data received\"}");
   }
 }
+
+void handleButtonPress(int &button) {
+  delay(500);
+}
+
 
 void setup() {
   // Knapper og LED setup
@@ -143,24 +152,21 @@ void loop() {
   int green_button_state = digitalRead(green_button_pin);
   int yellow_button_state = digitalRead(yellow_button_pin);
   int red_button_state = digitalRead(red_button_pin);
-  
-  Serial.println("ballalalalal");
+
+
 
   // Styr LED-er basert på knapper
   if (green_button_state == 1) {
-    Serial.println("Green button");
     digitalWrite(green_led_pin, LOW);
     digitalWrite(yellow_led_pin, HIGH);
     digitalWrite(red_led_pin, HIGH);
 
   } else if (yellow_button_state == 1) {
-    Serial.println("Yellow button");
     digitalWrite(green_led_pin, HIGH);
     digitalWrite(yellow_led_pin, LOW);
     digitalWrite(red_led_pin, HIGH);
 
   } else if (red_button_state == 1) {
-    Serial.println("Red button");
     digitalWrite(green_led_pin, HIGH);
     digitalWrite(yellow_led_pin, HIGH);
     digitalWrite(red_led_pin, LOW);
