@@ -443,7 +443,7 @@ void setup() {
   // I2C og LCD
   Wire.begin();
   lcd.init();
-  lcd.setRGB(0, 0, 255);
+  lcd.setRGB(255, 255, 255);
   lcd.setCursor(0, 0);
   lcd.print("Hello world!");
   lcd.setCursor(0, 1);
