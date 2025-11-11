@@ -256,7 +256,6 @@ void initFile() {
   }
 }
 
-
 void appendEntry(int questionID, int result, const char* timestamp) {
   // Open file for reading
   File file = SPIFFS.open(dataFile, FILE_READ);
@@ -351,31 +350,36 @@ void handleButtonPress(int button) {
   // Skru av de andre LED-ene basert på hvilken knapp som ble trykket
   if (button == 1) {
     for (int i = 0; i <= NUM_LEDS; i++) {
-      leds[i] = CRGB (255, 0, 0);
+      leds[i] = CRGB (100, 0, 0);
     } FastLED.show();
     digitalWrite(green_led_pin, LOW);
     digitalWrite(yellow_led_pin, LOW);
   } else if (button == 2) {
     for (int i = 0; i <= NUM_LEDS; i++) {
-      leds[i] = CRGB (0, 255, 0);
+      leds[i] = CRGB (0, 100, 0);
     } FastLED.show();
     digitalWrite(red_led_pin, LOW);
     digitalWrite(yellow_led_pin, LOW);
   } else {
     for (int i = 0; i <= NUM_LEDS; i++) {
-      leds[i] = CRGB (0, 255, 255);
+      leds[i] = CRGB (100, 100, 0);
     } FastLED.show();
     digitalWrite(red_led_pin, LOW);
     digitalWrite(green_led_pin, LOW);
   }
 
+  
   // Lagre resultatet med riktig question ID
   String timestamp = getTimestamp();
   appendEntry(currentQuestionID, button, timestamp.c_str());
-
-  lcd.clear();
-  delay(500);
   
+  lcd.clear();
+  delay(1000);
+  
+  for (int i = 0; i <= NUM_LEDS; i++) {
+  leds[i] = CRGB (99, 68, 96);
+  } FastLED.show();
+
   // Gå til neste spørsmål
   questionIndex++;
   
@@ -401,7 +405,7 @@ void handleButtonPress(int button) {
     Serial.println("All questions answered!");
   }
   
-  delay(500);
+  delay(1000);
   
   // Skru på alle LED-ene igjen
   digitalWrite(green_led_pin, HIGH);
@@ -445,9 +449,9 @@ void setup() {
   lcd.init();
   lcd.setRGB(255, 255, 255);
   lcd.setCursor(0, 0);
-  lcd.print("Hello world!");
+  lcd.print("Velkommen til");
   lcd.setCursor(0, 1);
-  lcd.print("ESP32 DFRobot");
+  lcd.print("Unidings!");
 
   // WiFi
   Serial.println("Starting WiFi connection...");
@@ -474,6 +478,10 @@ void setup() {
   if (MDNS.begin("esp32")) {
     Serial.println("mDNS responder started: http://esp32.local/");
   }
+
+  for (int i = 0; i <= NUM_LEDS; i++) {
+  leds[i] = CRGB (99, 68, 96);
+  } FastLED.show();
 
   // WebServer routes
   server.on("/api/screen", HTTP_POST, startScreen);
