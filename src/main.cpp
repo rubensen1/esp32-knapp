@@ -5,10 +5,13 @@
 #include <ESPmDNS.h>
 #include <DFRobot_RGBLCD1602.h>
 #include <ArduinoJson.h>
+#include <FastLED.h>
 
 // LED strip definisjon (fra første program)
 #define LED_PIN 4
-#define NUM_LEDS 20
+#define NUM_LEDS 38
+CRGB leds[NUM_LEDS];
+
 
 // Knapp pins
 const int green_button_pin = 34;
@@ -347,12 +350,21 @@ void handleButtonPress(int button) {
   
   // Skru av de andre LED-ene basert på hvilken knapp som ble trykket
   if (button == 1) {
+    for (int i = 0; i <= NUM_LEDS; i++) {
+      leds[i] = CRGB (255, 0, 0);
+    } FastLED.show();
     digitalWrite(green_led_pin, LOW);
     digitalWrite(yellow_led_pin, LOW);
   } else if (button == 2) {
+    for (int i = 0; i <= NUM_LEDS; i++) {
+      leds[i] = CRGB (0, 255, 0);
+    } FastLED.show();
     digitalWrite(red_led_pin, LOW);
     digitalWrite(yellow_led_pin, LOW);
   } else {
+    for (int i = 0; i <= NUM_LEDS; i++) {
+      leds[i] = CRGB (0, 255, 255);
+    } FastLED.show();
     digitalWrite(red_led_pin, LOW);
     digitalWrite(green_led_pin, LOW);
   }
@@ -414,6 +426,9 @@ void setup() {
 
   // Serial
   Serial.begin(115200);
+
+  // led setup
+  FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
   
   // spiffs setup
   initFile();
